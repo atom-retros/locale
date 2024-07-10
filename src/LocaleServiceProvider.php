@@ -16,6 +16,8 @@ class LocaleServiceProvider extends PackageServiceProvider
 
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'locale');
 
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'locale');
+
         $package
             ->name('locale')
             ->hasConfigFile()

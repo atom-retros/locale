@@ -15,7 +15,10 @@ class LocaleController extends Controller
      */
     public function __invoke(string $locale): RedirectResponse
     {
-        $supportedLocale = Arr::first(config('locale.supported_locales'), fn (array $value) => $value['country_code'] === strtolower($locale));
+        $supportedLocale = Arr::first(
+            config('locale.supported_locales'),
+            fn (array $value) => $value['country_code'] === strtolower($locale),
+        );
 
         if (! $supportedLocale) {
             return redirect()->back()->withErrors(['message' => __('The language selected is not supported')]);
