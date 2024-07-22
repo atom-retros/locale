@@ -33,6 +33,15 @@ class LocaleMiddleware
             default => config('app.locale'),
         };
 
+        $supportedLocale = Arr::first(
+            config('locale.supported_locales'),
+            fn (array $value) => $value['country_code'] === strtolower($countryCode),
+        );
+
+        if (! $supportedLocale) {
+            $countryCode = config('app.fallback_locale');
+        }
+
         Session::put('locale', $countryCode);
 
         App::setLocale($countryCode);
